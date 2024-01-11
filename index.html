@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armazenamento de remedios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2> Armazenamento de Remédios</h2>
+
+    <form id="remedioForm">
+        <label for="nome">Nome do Remédio</label>
+        <input type="text" id="nome" required>
+        <label for="preco"> Preço: </label>
+        <input type="number" step=".01" id="preco" required><br>
+        <button type="button" onclick="adicionarRemedio()">Adicionar Remédio</button>
+    </form>
+    
+    <table id="tabelaRemedios">
+        <tr>
+            <th> Nome do Remédio </th>
+            <th> Preço (R$) </th>
+            <th colspan="2">Ações</th>
+        </tr>
+    </table>
+
+    <script>
+        function adicionarRemedio() {
+            var nomeRemedio = document.getElementById('nome').value;
+            var precoRemedio = document.getElementById('preco').value;
+
+            //Verifica se os campos não estão vazios
+            if (nomeRemedio === "" || precoRemedio === "") {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            // Adiciona uma nova linha na tabela
+            var tabela = document.getElementById('tabelaRemedios');
+            var novaLinha = tabela.insertRow(tabela.rows.length);
+            var celulaNome = novaLinha.insertCell(0);
+            var celulaPreco = novaLinha.insertCell(1);
+
+            //Adiciona os valores na nova linha
+            celulaNome.innerHTML = nomeRemedio;
+            celulaPreco.innerHTML = "R$" + parseFloat(precoRemedio).toFixed(2);
+
+            // Limpa os campos de formulário
+            document.getElementById('nome').value = "";
+            document.getElementById('preco').value = "";
+        }
+    </script>
+</body>
+</html>
